@@ -109,6 +109,13 @@ const videos = [
 
 export default function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [form, setForm] = useState({ name: "", phone: "", age: "", course: "" });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -207,23 +214,115 @@ export default function Index() {
             </div>
           </div>
           <div className="relative">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl animate-float">
-              <img src={HERO_IMG} alt="Дети на занятии" className="w-full h-[480px] object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-purple-900/30 to-transparent" />
-            </div>
-            <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3">
-              <div className="w-12 h-12 gradient-violet rounded-xl flex items-center justify-center">
-                <Icon name="Bot" size={24} className="text-white" />
+            {!submitted ? (
+              <div className="bg-white rounded-3xl shadow-2xl border border-purple-100 p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 gradient-violet rounded-xl flex items-center justify-center">
+                    <Icon name="Gift" size={20} className="text-white" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-purple-900 text-base">Бесплатный пробный урок</div>
+                    <div className="text-xs text-violet-500 font-medium">Запись займёт 1 минуту</div>
+                  </div>
+                </div>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 block">Имя родителя</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Например, Анна"
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl border-2 border-purple-100 focus:border-violet-400 outline-none text-sm text-gray-800 transition-colors placeholder:text-gray-300"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 block">Телефон</label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="+7 (___) ___-__-__"
+                      value={form.phone}
+                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl border-2 border-purple-100 focus:border-violet-400 outline-none text-sm text-gray-800 transition-colors placeholder:text-gray-300"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 block">Возраст ребёнка</label>
+                      <select
+                        required
+                        value={form.age}
+                        onChange={(e) => setForm({ ...form, age: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl border-2 border-purple-100 focus:border-violet-400 outline-none text-sm text-gray-800 transition-colors bg-white"
+                      >
+                        <option value="">Выбрать</option>
+                        <option>7–9 лет</option>
+                        <option>10–12 лет</option>
+                        <option>13–15 лет</option>
+                        <option>16–17 лет</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5 block">Направление</label>
+                      <select
+                        required
+                        value={form.course}
+                        onChange={(e) => setForm({ ...form, course: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl border-2 border-purple-100 focus:border-violet-400 outline-none text-sm text-gray-800 transition-colors bg-white"
+                      >
+                        <option value="">Выбрать</option>
+                        <option>Робототехника</option>
+                        <option>Цифровой дизайн</option>
+                        <option>Разработка игр</option>
+                        <option>Не знаю пока</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full gradient-violet text-white py-3.5 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity mt-2"
+                  >
+                    Записаться на урок бесплатно
+                  </button>
+                  <p className="text-center text-xs text-gray-400">
+                    Нажимая кнопку, вы соглашаетесь с{" "}
+                    <a href="#" className="text-violet-500 hover:underline">политикой конфиденциальности</a>
+                  </p>
+                </form>
+                <div className="flex items-center gap-4 mt-5 pt-5 border-t border-purple-50">
+                  {[["🏆", "500+ учеников"], ["⭐", "Рейтинг 4.9"], ["🎓", "С 7 до 17 лет"]].map(([emoji, text]) => (
+                    <div key={text} className="flex items-center gap-1.5 text-xs text-gray-500">
+                      <span>{emoji}</span> {text}
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div>
-                <div className="text-sm font-bold text-gray-800">Новый проект!</div>
-                <div className="text-xs text-gray-500">Миша собрал робота 🎉</div>
+            ) : (
+              <div className="bg-white rounded-3xl shadow-2xl border border-purple-100 p-10 text-center flex flex-col items-center gap-5">
+                <div className="w-20 h-20 gradient-violet rounded-full flex items-center justify-center animate-pulse-ring">
+                  <Icon name="CheckCircle" size={40} className="text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-purple-900 mb-2">Отлично, {form.name}!</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">
+                    Мы получили вашу заявку. Наш менеджер свяжется с вами в течение 15 минут и согласует время пробного урока.
+                  </p>
+                </div>
+                <div className="bg-violet-50 rounded-2xl px-6 py-4 w-full text-left">
+                  <div className="text-xs text-violet-500 font-semibold mb-1">Что дальше?</div>
+                  <ul className="space-y-1">
+                    {["Звонок от менеджера", "Выбор удобного времени", "Бесплатный пробный урок"].map((s, i) => (
+                      <li key={s} className="flex items-center gap-2 text-sm text-gray-700">
+                        <span className="w-5 h-5 gradient-violet rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0">{i + 1}</span>
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
-            <div className="absolute -top-4 -right-4 bg-white rounded-2xl shadow-xl p-3 text-center">
-              <div className="text-2xl font-bold text-purple-700">12+</div>
-              <div className="text-xs text-gray-500">курсов</div>
-            </div>
+            )}
           </div>
         </div>
         <div className="w-full gradient-violet-soft py-6 border-t border-purple-100">
