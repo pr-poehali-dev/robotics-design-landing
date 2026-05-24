@@ -126,9 +126,9 @@ export default function Index() {
     <div className="min-h-screen bg-white overflow-x-hidden">
 
       {/* NAVIGATION */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-purple-100 shadow-sm">
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/10 shadow-sm" style={{ background: "rgba(26,5,51,0.92)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-8 h-16 flex items-center justify-between">
-          <button onClick={() => scrollTo("hero")} className="flex items-center gap-2 font-display font-bold text-lg text-purple-900">
+          <button onClick={() => scrollTo("hero")} className="flex items-center gap-2 font-display font-bold text-lg text-white">
             <span className="w-8 h-8 gradient-violet rounded-lg flex items-center justify-center text-white text-sm">Р</span>
             РобоАрт
           </button>
@@ -141,7 +141,7 @@ export default function Index() {
               { label: "Контакты", id: "contacts" },
             ].map((item) => (
               <button key={item.id} onClick={() => scrollTo(item.id)}
-                className="nav-link text-sm font-medium text-gray-600 hover:text-purple-700">
+                className="text-sm font-medium text-white/70 hover:text-white transition-colors">
                 {item.label}
               </button>
             ))}
@@ -151,11 +151,11 @@ export default function Index() {
             Записаться
           </button>
           <button className="md:hidden p-2" onClick={() => setMenuOpen(!menuOpen)}>
-            <Icon name={menuOpen ? "X" : "Menu"} size={22} className="text-purple-800" />
+            <Icon name={menuOpen ? "X" : "Menu"} size={22} className="text-white" />
           </button>
         </div>
         {menuOpen && (
-          <div className="md:hidden bg-white border-t border-purple-100 px-4 py-4 flex flex-col gap-3">
+          <div className="md:hidden border-t border-white/10 px-4 py-4 flex flex-col gap-3" style={{ background: "rgba(26,5,51,0.98)" }}>
             {[
               { label: "Курсы", id: "courses" },
               { label: "О школе", id: "about" },
@@ -164,7 +164,7 @@ export default function Index() {
               { label: "Контакты", id: "contacts" },
             ].map((item) => (
               <button key={item.id} onClick={() => scrollTo(item.id)}
-                className="text-left text-gray-700 font-medium py-1 hover:text-purple-700">
+                className="text-left text-white/80 font-medium py-1 hover:text-white">
                 {item.label}
               </button>
             ))}
@@ -177,40 +177,51 @@ export default function Index() {
       </nav>
 
       {/* HERO */}
-      <section id="hero" className="pt-16 min-h-screen flex flex-col">
-        <div className="flex-1 max-w-7xl mx-auto px-4 sm:px-8 grid md:grid-cols-2 gap-12 items-center py-20">
-          <div className="space-y-8">
-            <div className="inline-flex items-center gap-2 bg-violet-100 text-violet-700 px-4 py-1.5 rounded-full text-sm font-semibold">
+      <section id="hero" className="pt-16 min-h-screen flex flex-col" style={{ background: "#1a0533" }}>
+        <div
+          className="flex-1 relative flex flex-col"
+          style={{
+            backgroundImage: `url(https://cdn.poehali.dev/projects/79264b35-54bd-4dbd-aedd-cdcbb9352f56/bucket/76c11c59-0376-4d8d-8474-e377a585fdf8.png)`,
+            backgroundSize: "cover",
+            backgroundPosition: "left center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(26,5,51,0.15) 0%, rgba(26,5,51,0.55) 40%, rgba(26,5,51,0.97) 65%)" }} />
+          <div className="relative z-10 flex-1 max-w-7xl mx-auto px-4 sm:px-8 w-full grid md:grid-cols-2 gap-12 items-center py-20">
+          <div className="space-y-6">
+            <div className="inline-flex items-center gap-2 bg-white/10 text-white/90 border border-white/20 px-4 py-1.5 rounded-full text-sm font-semibold backdrop-blur-sm">
               <Icon name="Sparkles" size={16} />
               Набор открыт — 2024 / 2025
             </div>
-            <h1 className="hero-title font-display text-purple-950">
+            <h1 className="font-display text-white font-bold leading-tight" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
               Твой ребёнок
               <br />
-              <span className="text-gradient">создаёт будущее</span>
+              <span style={{ color: "#c084fc" }}>создаёт будущее</span>
               <br />
               уже сегодня
             </h1>
-            <p className="text-lg text-gray-600 leading-relaxed max-w-md">
+            <p className="text-white/70 leading-relaxed max-w-md text-base">
               Онлайн-школа робототехники и цифрового дизайна для детей 7–17 лет. Реальные проекты, живые занятия, опытные педагоги.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex gap-8 pt-1">
+              {[["500+", "учеников"], ["4.9", "рейтинг"], ["3 года", "на рынке"]].map(([num, label]) => (
+                <div key={label}>
+                  <div className="text-xl font-bold text-white">{num}</div>
+                  <div className="text-xs text-white/50">{label}</div>
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-3">
               <button onClick={() => scrollTo("courses")}
-                className="gradient-violet text-white px-8 py-3.5 rounded-full text-base font-semibold hover:opacity-90 transition-all animate-pulse-ring">
+                className="text-white px-6 py-3 rounded-full text-sm font-semibold hover:opacity-90 transition-all border border-white/30 backdrop-blur-sm"
+                style={{ background: "rgba(139,92,246,0.4)" }}>
                 Посмотреть курсы
               </button>
               <button onClick={() => scrollTo("about")}
-                className="border-2 border-purple-200 text-purple-800 px-8 py-3.5 rounded-full text-base font-semibold hover:bg-purple-50 transition-colors">
+                className="border border-white/20 text-white/80 px-6 py-3 rounded-full text-sm font-semibold hover:bg-white/10 transition-colors">
                 О школе
               </button>
-            </div>
-            <div className="flex gap-8 pt-2">
-              {[["500+", "учеников"], ["4.9", "рейтинг"], ["3 года", "на рынке"]].map(([num, label]) => (
-                <div key={label}>
-                  <div className="text-2xl font-bold text-purple-900">{num}</div>
-                  <div className="text-sm text-gray-500">{label}</div>
-                </div>
-              ))}
             </div>
           </div>
           <div className="relative">
@@ -325,10 +336,11 @@ export default function Index() {
             )}
           </div>
         </div>
-        <div className="w-full gradient-violet-soft py-6 border-t border-purple-100">
+        </div>
+        <div className="w-full py-6 border-t border-white/10" style={{ background: "rgba(26,5,51,0.98)" }}>
           <div className="max-w-7xl mx-auto px-8 flex flex-wrap justify-center md:justify-between gap-6">
             {["LEGO Education", "Arduino", "Figma", "Unity", "Python", "Scratch"].map((tech) => (
-              <span key={tech} className="text-purple-700 font-semibold text-sm opacity-70 hover:opacity-100 transition-opacity">{tech}</span>
+              <span key={tech} className="text-white/50 font-semibold text-sm hover:text-white/80 transition-opacity">{tech}</span>
             ))}
           </div>
         </div>
