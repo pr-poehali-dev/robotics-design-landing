@@ -126,11 +126,14 @@ export default function Index() {
     <div className="min-h-screen bg-white overflow-x-hidden">
 
       {/* NAVIGATION */}
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/10 shadow-sm" style={{ background: "rgba(26,5,51,0.92)" }}>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-purple-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 h-16 flex items-center justify-between">
-          <button onClick={() => scrollTo("hero")} className="flex items-center gap-2 font-display font-bold text-lg text-white">
-            <span className="w-8 h-8 gradient-violet rounded-lg flex items-center justify-center text-white text-sm">Р</span>
-            РобоАрт
+          <button onClick={() => scrollTo("hero")} className="flex items-center">
+            <img
+              src="https://cdn.poehali.dev/projects/79264b35-54bd-4dbd-aedd-cdcbb9352f56/bucket/c47dd273-dfdb-4d06-8bcb-b59c33135418.png"
+              alt="PIXART"
+              className="h-7 w-auto"
+            />
           </button>
           <div className="hidden md:flex items-center gap-8">
             {[
@@ -141,7 +144,7 @@ export default function Index() {
               { label: "Контакты", id: "contacts" },
             ].map((item) => (
               <button key={item.id} onClick={() => scrollTo(item.id)}
-                className="text-sm font-medium text-white hover:text-violet-300 transition-colors">
+                className="text-sm font-medium text-purple-800 hover:text-violet-600 transition-colors">
                 {item.label}
               </button>
             ))}
@@ -151,11 +154,11 @@ export default function Index() {
             Записаться
           </button>
           <button className="md:hidden p-2" onClick={() => setMenuOpen(!menuOpen)}>
-            <Icon name={menuOpen ? "X" : "Menu"} size={22} className="text-white" />
+            <Icon name={menuOpen ? "X" : "Menu"} size={22} className="text-purple-800" />
           </button>
         </div>
         {menuOpen && (
-          <div className="md:hidden border-t border-white/10 px-4 py-4 flex flex-col gap-3" style={{ background: "rgba(26,5,51,0.98)" }}>
+          <div className="md:hidden bg-white border-t border-purple-100 px-4 py-4 flex flex-col gap-3">
             {[
               { label: "Курсы", id: "courses" },
               { label: "О школе", id: "about" },
@@ -164,7 +167,7 @@ export default function Index() {
               { label: "Контакты", id: "contacts" },
             ].map((item) => (
               <button key={item.id} onClick={() => scrollTo(item.id)}
-                className="text-left text-white/80 font-medium py-1 hover:text-white">
+                className="text-left text-purple-800 font-medium py-1 hover:text-violet-600">
                 {item.label}
               </button>
             ))}
