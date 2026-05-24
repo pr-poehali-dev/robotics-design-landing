@@ -141,7 +141,7 @@ export default function Index() {
               { label: "Контакты", id: "contacts" },
             ].map((item) => (
               <button key={item.id} onClick={() => scrollTo(item.id)}
-                className="text-sm font-medium text-white/70 hover:text-white transition-colors">
+                className="text-sm font-medium text-white hover:text-violet-300 transition-colors">
                 {item.label}
               </button>
             ))}
@@ -177,14 +177,15 @@ export default function Index() {
       </nav>
 
       {/* HERO */}
-      <section id="hero" className="pt-16 min-h-screen flex flex-col" style={{ background: "#1a0533" }}>
+      <section id="hero" className="pt-16 flex flex-col" style={{ background: "#1a0533", minHeight: "100vh", maxHeight: "100vh", overflow: "hidden" }}>
         <div
           className="flex-1 relative flex flex-col"
           style={{
             backgroundImage: `url(https://cdn.poehali.dev/projects/79264b35-54bd-4dbd-aedd-cdcbb9352f56/bucket/76c11c59-0376-4d8d-8474-e377a585fdf8.png)`,
             backgroundSize: "cover",
-            backgroundPosition: "left center",
+            backgroundPosition: "-20px top",
             backgroundRepeat: "no-repeat",
+            overflow: "hidden",
           }}
         >
           <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(26,5,51,0.15) 0%, rgba(26,5,51,0.55) 40%, rgba(26,5,51,0.97) 65%)" }} />
